@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="739.0" style="-fx-background-color: #2e2e2e;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.HelloController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="739.0" style="-fx-background-color: #2e2e2e;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.HelloController">
   <tabs>
     <Tab text="Add Member">
       <content>
@@ -132,7 +132,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="showbtnM" layoutX="349.0" layoutY="91.0" mnemonicParsing="false" onAction="#showMovie" text="Show Member">
+                  <Button fx:id="showbtnM" layoutX="349.0" layoutY="91.0" mnemonicParsing="false" onAction="#showMovie" text="Show Movie">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -155,13 +155,13 @@
                         <Font name="Times New Roman" size="15.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="122.0" layoutY="45.0" prefHeight="26.0" prefWidth="50.0" />
+                  <TextField fx:id="idM" layoutX="122.0" layoutY="45.0" prefHeight="26.0" prefWidth="50.0" />
                   <Label layoutX="189.0" layoutY="48.0" prefHeight="18.0" prefWidth="82.0" text="Movie Id :" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="15.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="258.0" layoutY="44.0" prefHeight="26.0" prefWidth="50.0" />
+                  <TextField fx:id="movId" layoutX="258.0" layoutY="44.0" prefHeight="26.0" prefWidth="50.0" />
                   <Label layoutX="14.0" layoutY="88.0" prefHeight="20.0" prefWidth="115.0" text="Return Movie :" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
@@ -172,46 +172,47 @@
                         <Font name="Times New Roman" size="15.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="122.0" layoutY="120.0" prefHeight="26.0" prefWidth="50.0" />
+                  <TextField fx:id="ReturnMId" layoutX="122.0" layoutY="120.0" prefHeight="26.0" prefWidth="50.0" />
                   <Label layoutX="189.0" layoutY="123.0" prefHeight="18.0" prefWidth="82.0" text="Movie Id :" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="15.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="258.0" layoutY="119.0" prefHeight="26.0" prefWidth="50.0" />
+                  <TextField fx:id="returnMvId" layoutX="258.0" layoutY="119.0" prefHeight="26.0" prefWidth="50.0" />
                   <Label layoutX="321.0" layoutY="49.0" prefHeight="18.0" prefWidth="48.0" text="Date :" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="15.0" />
                      </font>
                   </Label>
-                  <DatePicker layoutX="355.0" layoutY="46.0" />
+                  <DatePicker fx:id="date_field" layoutX="369.0" layoutY="46.0" />
                   <Label layoutX="321.0" layoutY="122.0" prefHeight="18.0" prefWidth="48.0" text="Date :" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="15.0" />
                      </font>
                   </Label>
-                  <DatePicker layoutX="355.0" layoutY="119.0" />
-                  <Label layoutX="149.0" layoutY="362.0" prefHeight="106.0" prefWidth="439.0" text="Movie Rented successfully" textFill="WHITE">
-                     <font>
-                        <Font name="Times New Roman" size="39.0" />
-                     </font>
-                  </Label>
+                  <DatePicker fx:id="DateReturn" layoutX="369.0" layoutY="121.0" />
                   <Label layoutX="30.0" layoutY="154.0" prefHeight="50.0" prefWidth="176.0" text="Payement due :" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="26.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="197.0" layoutY="167.0" />
-                  <Button fx:id="addbtnM1" layoutX="588.0" layoutY="43.0" mnemonicParsing="false" onAction="#addMovie" text="Rent Movie">
+                  <TextField fx:id="Payement_field" layoutX="197.0" layoutY="167.0" prefHeight="25.0" prefWidth="81.0" />
+                  <Button fx:id="addbtnMRent" layoutX="588.0" layoutY="43.0" mnemonicParsing="false" onAction="#addMovieRent" text="Rent Movie">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="addbtnM11" layoutX="588.0" layoutY="116.0" mnemonicParsing="false" onAction="#addMovie" text="Return Movie">
+                  <Button fx:id="showMvPay" layoutX="588.0" layoutY="116.0" mnemonicParsing="false" onAction="#calculate" text="Return Movie">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
+                  <Button fx:id="showMv" layoutX="318.0" layoutY="164.0" mnemonicParsing="false" onAction="#showMovieR" text="Show Movie">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <TextArea fx:id="sMv" layoutX="27.0" layoutY="220.0" prefHeight="236.0" prefWidth="686.0" />
                </children>
             </AnchorPane>
          </content>

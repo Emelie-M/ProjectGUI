@@ -2,5 +2,5 @@ package com.example.projectgui;
 
 public interface Payement {
 
-    public void calculate();
+    public int calculate(int days);
 }

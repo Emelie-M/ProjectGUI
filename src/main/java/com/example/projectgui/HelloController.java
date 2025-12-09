@@ -5,25 +5,29 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class HelloController {
     @FXML
-    private TextField id_field, id_fieldm, name_field, name_fieldm, age_field, age_fieldm, school_field, grade_field, job_field, organization_field, movieId, title_field,genre_field;
+    private TextField id_field, id_fieldm, name_field, name_fieldm, age_field, age_fieldm, school_field, grade_field, job_field, organization_field, movieId, title_field,genre_field, movId, idM, ReturnMId, returnMvId, Payement_field;
 
     @FXML
-    private Button addbtn, showbtn, addbtnM, showbtnM;
+    private DatePicker date_field, DateReturn;
 
     @FXML
-    private TextArea show_field,showMovieArea;
+    private Button addbtn, showbtn, addbtnM, showbtnM, addbtnMRent, showMv;
+
+
+    @FXML
+    private TextArea show_field,showMovieArea,sMv;
 
     @FXML
     ArrayList<Student> students = new ArrayList<>();
@@ -146,4 +150,73 @@ public class HelloController {
             showMovieArea.appendText("\n");
         }
     }
+
+    @FXML
+    protected void addMovieRent(ActionEvent event){
+        addbtnMRent = (Button) event.getSource();
+        boolean flag = false;
+        for(int i=0;i<movies.size();i++){
+            if(!(movies.get(i).getId().equalsIgnoreCase(movId.getText())) ||movies.get(i).isAvailability()==false){
+                flag=true;
+            }
+            else if(movies.get(i).getId().equalsIgnoreCase(movId.getText())&&movies.get(i).isAvailability()==true) {
+                System.out.println("Movie rented");
+                String date = String.valueOf(date_field);
+                movies.get(i).setDate(date);
+                movies.get(i).setAvailability(false);
+                flag=false;
+                for(int s=0;s<students.size();s++) {
+                    if (idM.getText().equalsIgnoreCase(students.get(s).getId())) {
+                        movies.get(i).setStudentId(idM.getText());
+                    }
+                }
+                for(int m=0;m<members.size();m++){
+                   if (idM.getText().equalsIgnoreCase(members.get(m).getId())){
+                        movies.get(i).setMemberId(idM.getText());
+                   }
+                }
+
+            }
+            try {
+                if(flag){
+                    throw new CheckMovieException("Movie doesn't exist or not available");
+                }
+            }catch (CheckMovieException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    protected void calculate(){
+        int days;
+        try{
+            for(Movie movie : movies){
+                if(movie.getStudentId().equalsIgnoreCase(ReturnMId.getText())||movie.getMemberId().equalsIgnoreCase(ReturnMId.getText())){
+                    if(movie.getId().equalsIgnoreCase(returnMvId.getText())){
+                        movie.setAvailability(true);
+                        days = DateReturn.getValue().compareTo(date_field.getValue());
+                        String paye= String.valueOf(movie.calculate(days));
+                        Payement_field.appendText(paye);
+
+                    }
+                }
+                else{
+                    throw new Exception();
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
+    protected void showMovieR(){
+        sMv.clear();
+        for (Movie movie : movies) {
+            sMv.appendText(movie.toString());
+            sMv.appendText("\n");
+        }
+    }
+
 }
