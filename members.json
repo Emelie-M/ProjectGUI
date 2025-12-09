@@ -1,0 +1,30 @@
+[
+  {
+    "job": "Cleaner",
+    "organization": "Costco",
+    "name": "Rudy",
+    "age": 20,
+    "id": "E6"
+  },
+  {
+    "job": "Singer",
+    "organization": "Hybe",
+    "name": "Soobin",
+    "age": 25,
+    "id": "E7"
+  },
+  {
+    "job": "Cashier",
+    "organization": "Pharmaprix",
+    "name": "Krystina",
+    "age": 19,
+    "id": "E1"
+  },
+  {
+    "job": "Singer",
+    "organization": "Co.inc",
+    "name": "Clodia",
+    "age": 18,
+    "id": "E2"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Zootopia",
+    "genre": "comedy",
+    "id": "M1",
+    "availability": true
+  },
+  {
+    "title": "Happy Gilmore",
+    "genre": "comedy",
+    "id": "M2",
+    "availability": true
+  },
+  {
+    "title": "Al fondo hay sitio",
+    "genre": "Drama",
+    "id": "M3",
+    "availability": true
+  },
+  {
+    "title": "Five Nights at Freddy\u0027s",
+    "genre": "Horror",
+    "id": "M4",
+    "availability": true
+  }
+]

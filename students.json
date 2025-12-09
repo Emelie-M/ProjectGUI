@@ -1,0 +1,44 @@
+[
+  {
+    "schoolName": "Vanier",
+    "grade": 2,
+    "name": "Emelie",
+    "age": 18,
+    "id": "S1"
+  },
+  {
+    "schoolName": "Vanier",
+    "grade": 2,
+    "name": "Esther",
+    "age": 18,
+    "id": "S2"
+  },
+  {
+    "schoolName": "Dawson",
+    "grade": 3,
+    "name": "Arina",
+    "age": 18,
+    "id": "S3"
+  },
+  {
+    "schoolName": "Vanier",
+    "grade": 2,
+    "name": "Laura",
+    "age": 18,
+    "id": "S4"
+  },
+  {
+    "schoolName": "LaSalle",
+    "grade": 4,
+    "name": "Aldo",
+    "age": 24,
+    "id": "S5"
+  },
+  {
+    "schoolName": "EdouardMonPetit",
+    "grade": 2,
+    "name": "Sofia",
+    "age": 21,
+    "id": "S9"
+  }
+]

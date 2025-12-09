@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="739.0" style="-fx-background-color: #2e2e2e;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.HelloController">
+  <tabs>
+    <Tab text="Add Member">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="415.0" prefWidth="650.0" style="-fx-background-color: #2e2e2e;">
+               <children>
+                  <Label layoutX="126.0" layoutY="44.0" prefHeight="18.0" prefWidth="57.0" text="Name :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="name_field" layoutX="177.0" layoutY="40.0" prefHeight="26.0" prefWidth="110.0" />
+                  <Label layoutX="299.0" layoutY="44.0" prefHeight="18.0" prefWidth="43.0" text="Age :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="age_field" layoutX="342.0" layoutY="39.0" prefHeight="26.0" prefWidth="37.0" />
+                  <Label layoutX="32.0" layoutY="43.0" prefHeight="18.0" prefWidth="28.0" text="Id :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="id_field" layoutX="60.0" layoutY="40.0" prefHeight="26.0" prefWidth="54.0" />
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="115.0" text="STUDENTS :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="390.0" layoutY="44.0" prefHeight="18.0" prefWidth="65.0" text="School :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="school_field" layoutX="445.0" layoutY="40.0" prefHeight="26.0" prefWidth="106.0" />
+                  <Label layoutX="559.0" layoutY="43.0" prefHeight="18.0" prefWidth="57.0" text="Grade :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="grade_field" layoutX="610.0" layoutY="39.0" prefHeight="26.0" prefWidth="55.0" />
+                  <Label layoutX="14.0" layoutY="82.0" prefHeight="20.0" prefWidth="155.0" text="External Member :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="126.0" layoutY="118.0" prefHeight="18.0" prefWidth="57.0" text="Name :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="name_fieldm" layoutX="177.0" layoutY="114.0" prefHeight="26.0" prefWidth="110.0" />
+                  <Label layoutX="299.0" layoutY="118.0" prefHeight="18.0" prefWidth="43.0" text="Age :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="age_fieldm" layoutX="342.0" layoutY="113.0" prefHeight="26.0" prefWidth="37.0" />
+                  <Label layoutX="32.0" layoutY="117.0" prefHeight="18.0" prefWidth="28.0" text="Id :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="id_fieldm" layoutX="60.0" layoutY="114.0" prefHeight="26.0" prefWidth="54.0" />
+                  <Label layoutX="390.0" layoutY="118.0" prefHeight="18.0" prefWidth="39.0" text="Job :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="job_field" layoutX="423.0" layoutY="114.0" prefHeight="26.0" prefWidth="106.0" />
+                  <Label layoutX="540.0" layoutY="118.0" prefHeight="18.0" prefWidth="96.0" text="Organization :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="organization_field" layoutX="636.0" layoutY="114.0" prefHeight="26.0" prefWidth="92.0" />
+                  <Button fx:id="addbtn" layoutX="245.0" layoutY="163.0" mnemonicParsing="false" onAction="#addMember" text="Add Member">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="showbtn" layoutX="391.0" layoutY="163.0" mnemonicParsing="false" onAction="#showMember" text="Show Member">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <TextArea fx:id="show_field" layoutX="26.0" layoutY="217.0" prefHeight="237.0" prefWidth="690.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Add Movie">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="115.0" text="Movies :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="82.0" layoutY="47.0" prefHeight="18.0" prefWidth="28.0" text="Id :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="movieId" layoutX="110.0" layoutY="44.0" prefHeight="26.0" prefWidth="51.0" />
+                  <Label layoutX="174.0" layoutY="48.0" prefHeight="18.0" prefWidth="50.0" text="Title :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="title_field" layoutX="218.0" layoutY="44.0" prefHeight="26.0" prefWidth="179.0" />
+                  <Label layoutX="408.0" layoutY="48.0" prefHeight="18.0" prefWidth="50.0" text="Genre :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="genre_field" layoutX="458.0" layoutY="44.0" prefHeight="26.0" prefWidth="75.0" />
+                  <Button fx:id="addbtnM" layoutX="208.0" layoutY="91.0" mnemonicParsing="false" onAction="#addMovie" text="Add Movie">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="showbtnM" layoutX="349.0" layoutY="91.0" mnemonicParsing="false" onAction="#showMovie" text="Show Member">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <TextArea fx:id="showMovieArea" layoutX="29.0" layoutY="150.0" prefHeight="302.0" prefWidth="686.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Rent Movie">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="115.0" text="Movies :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="39.0" layoutY="48.0" prefHeight="18.0" prefWidth="50.0" text="Genre :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Return Movie">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="115.0" text="Movies :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="39.0" layoutY="48.0" prefHeight="18.0" prefWidth="50.0" text="Genre :" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
