@@ -15,6 +15,6 @@ public class Student extends Person  {
     }
 
     public String toString() {
-        return super.toString() + ", schoolName: " + schoolName + ", grade: " + grade;
+        return super.toString() + ",   schoolName: " + schoolName + ",   grade: " + grade;
     }
 }

@@ -68,10 +68,10 @@ public class Movie implements Payement{
     }
 
     public String toString() {
-        return "id="+id+
-                ", title= " + title +
-                ", genre= " + genre +
-                ", availability= " + availability;
+        return "id= "+id+
+                ",   title= " + title +
+                ",   genre= " + genre +
+                ",   availability= " + availability;
     }
 
     @Override

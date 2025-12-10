@@ -22,8 +22,7 @@ abstract public class Person {
     }
 
     public String toString() {
-        return "name= " + name +
-                ", age=" + age +
-                ", id=" + id;
+        return "id=" + id+",   name= " + name +
+                ",    age=" + age;
     }
 }

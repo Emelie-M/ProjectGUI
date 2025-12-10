@@ -14,6 +14,6 @@ public class External_Member extends Person{
     }
 
     public String toString() {
-        return super.toString()+ ", Job: " + job + ", Organization: " + organization;
+        return super.toString()+ ",   Job: " + job + ",   Organization: " + organization;
     }
 }
