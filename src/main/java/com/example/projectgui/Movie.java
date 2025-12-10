@@ -77,28 +77,43 @@ public class Movie implements Payement{
     @Override
     public int calculate(int days) {
             int fee = 0;
-            if(!studentId.isEmpty()){
-                if(days>7){
-                    int feedays=days-7;
-                    fee=5+ feedays;
-                    return fee;
+            try {
+                if(!studentId.isEmpty()){
+                    if(days>7){
+                        int feedays=days-7;
+                        fee=5+ feedays;
+                        return fee;
+                    }
+                    else{
+                        fee=5;
+                        return fee;
+                    }
                 }
                 else{
-                    fee=5;
-                    return fee;
+                    throw new Exception();
                 }
+            } catch(Exception e){
+                    System.out.println(e);
             }
-            if (!memberId.isEmpty()){
-                if(days>7){
-                    int feedays=days-7;
-                    fee=10+feedays*2;
-                    return fee;
+            try{
+                if (!memberId.isEmpty()){
+                    if(days>7){
+                        int feedays=days-7;
+                        fee=10+feedays*2;
+                        return fee;
+                    }
+                    else{
+                        fee=10;
+                        return fee;
+                    }
                 }
                 else{
-                    fee=10;
-                    return fee;
+                    throw new Exception();
                 }
+            }catch(Exception e){
+                System.out.println(e);
             }
+
         return fee;
     }
 }
