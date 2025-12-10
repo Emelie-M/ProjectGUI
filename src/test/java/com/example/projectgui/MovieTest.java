@@ -2,66 +2,16 @@ package com.example.projectgui;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class MovieTest {
 
     @Test
-    void getDate() {
-    }
-
-    @Test
-    void setDate() {
-    }
-
-    @Test
-    void getTitle() {
-    }
-
-    @Test
-    void setTitle() {
-    }
-
-    @Test
-    void getGenre() {
-    }
-
-    @Test
-    void setGenre() {
-    }
-
-    @Test
-    void isAvailability() {
-    }
-
-    @Test
-    void setAvailability() {
-    }
-
-    @Test
-    void getId() {
-    }
-
-    @Test
-    void getStudentId() {
-    }
-
-    @Test
-    void setStudentId() {
-    }
-
-    @Test
-    void getMemberId() {
-    }
-
-    @Test
-    void setMemberId() {
-    }
-
-    @Test
-    void testToString() {
-    }
-
-    @Test
     void calculate() {
+        Movie movie = new Movie("M12","Test Movie","Drama",true);
+        int days = 10;
+        movie.setStudentId("S1");
+        int result = movie.calculate(days);
+        assertEquals(8,result,"Should return correct amount to pay");
     }
 }

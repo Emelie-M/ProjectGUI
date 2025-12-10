@@ -5,19 +5,20 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class HelloController {
     @FXML
-    private TextField id_field, id_fieldm, name_field, name_fieldm, age_field, age_fieldm, school_field, grade_field, job_field, organization_field, movieId, title_field,genre_field, movId, idM, ReturnMId, returnMvId, Payement_field;
+    protected TextField id_field, id_fieldm, name_field, name_fieldm, age_field, age_fieldm, school_field, grade_field, job_field, organization_field, movieId, title_field,genre_field, movId, idM, ReturnMId, returnMvId, Payement_field;
 
     @FXML
     private DatePicker date_field, DateReturn;
