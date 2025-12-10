@@ -71,32 +71,40 @@ public class HelloController {
 
     @FXML
     protected void addMember() {
-        for(int i=0; i<students.size()&&i< members.size(); i++){
-            try{
-                if(id_field.getText().equalsIgnoreCase(students.get(i).getId())||id_fieldm.getText().equalsIgnoreCase(members.get(i).getId())){
-                    throw new CheckIdException("Id already exists");
+        boolean flag = true;
+        for(int i=0; i<students.size()&&i< members.size(); i++) {
+            while (flag) {
+                if (id_field.getText().equalsIgnoreCase(students.get(i).getId()) || id_fieldm.getText().equalsIgnoreCase(members.get(i).getId())) {
+                    flag = false;
+                    Alert warningAlert = new Alert(Alert.AlertType.WARNING);
+                    warningAlert.setTitle("Warning");
+                    warningAlert.setHeaderText("Duplicate Id");
+                    warningAlert.setContentText("Can't add member because id already exists");
+                    warningAlert.showAndWait();
                 }
-            }catch (CheckIdException c){
-                System.out.println(c.getMessage());
-            }
-        }
-        if (!id_field.getText().isEmpty() && !name_field.getText().isEmpty() && !age_field.getText().isEmpty()) {
-            int age = Integer.parseInt(age_field.getText());
-            int grade = Integer.parseInt(grade_field.getText());
-            students.add(new Student(id_field.getText(), name_field.getText(), age, school_field.getText(), grade));
-            try (FileWriter writer = new FileWriter(filePath1)) {
-                gsonStudent.toJson(students, writer);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        if (!id_fieldm.getText().isEmpty() && !name_fieldm.getText().isEmpty() && !age_fieldm.getText().isEmpty()) {
-            int agem = Integer.parseInt(age_fieldm.getText());
-            members.add(new External_Member(id_fieldm.getText(), name_fieldm.getText(), agem, job_field.getText(), organization_field.getText()));
-            try (FileWriter writer = new FileWriter(filePath2)) {
-                gsonMember.toJson(members, writer);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+                else {
+                    if (!id_field.getText().isEmpty() && !name_field.getText().isEmpty() && !age_field.getText().isEmpty()) {
+                        int age = Integer.parseInt(age_field.getText());
+                        int grade = Integer.parseInt(grade_field.getText());
+                        students.add(new Student(id_field.getText(), name_field.getText(), age, school_field.getText(), grade));
+                        try (FileWriter writer = new FileWriter(filePath1)) {
+                            gsonStudent.toJson(students, writer);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                        flag = false;
+                    }
+                    if (!id_fieldm.getText().isEmpty() && !name_fieldm.getText().isEmpty() && !age_fieldm.getText().isEmpty()) {
+                        int agem = Integer.parseInt(age_fieldm.getText());
+                        members.add(new External_Member(id_fieldm.getText(), name_fieldm.getText(), agem, job_field.getText(), organization_field.getText()));
+                        try (FileWriter writer = new FileWriter(filePath2)) {
+                            gsonMember.toJson(members, writer);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                        flag = false;
+                    }
+                }
             }
         }
     }
