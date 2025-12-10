@@ -5,10 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.File;
 import java.io.FileReader;
@@ -21,11 +18,10 @@ public class HelloController {
     protected TextField id_field, id_fieldm, name_field, name_fieldm, age_field, age_fieldm, school_field, grade_field, job_field, organization_field, movieId, title_field,genre_field, movId, idM, ReturnMId, returnMvId, Payement_field;
 
     @FXML
-    private DatePicker date_field, DateReturn;
+    private Label RentedText;
 
     @FXML
-    private Button addbtn, showbtn, addbtnM, showbtnM, addbtnMRent, showMv;
-
+    private DatePicker date_field, DateReturn;
 
     @FXML
     private TextArea show_field,showMovieArea,sMv;
@@ -41,6 +37,7 @@ public class HelloController {
     Gson gsonMovie = new GsonBuilder().setPrettyPrinting().create();
     String filePath3 = "movies.json";
     File file = new File(filePath1);
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     @FXML
     protected void initialize() {
@@ -73,8 +70,7 @@ public class HelloController {
     }
 
     @FXML
-    protected void addMember(ActionEvent event) {
-        addbtn = (Button) event.getSource();
+    protected void addMember() {
         for(int i=0; i<students.size()&&i< members.size(); i++){
             try{
                 if(id_field.getText().equalsIgnoreCase(students.get(i).getId())||id_fieldm.getText().equalsIgnoreCase(members.get(i).getId())){
@@ -84,18 +80,17 @@ public class HelloController {
                 System.out.println(c.getMessage());
             }
         }
-
-        if(!id_field.getText().isEmpty()&&!name_field.getText().isEmpty()&&!age_field.getText().isEmpty()){
+        if (!id_field.getText().isEmpty() && !name_field.getText().isEmpty() && !age_field.getText().isEmpty()) {
             int age = Integer.parseInt(age_field.getText());
             int grade = Integer.parseInt(grade_field.getText());
-            students.add(new Student(id_field.getText(),name_field.getText(),age,school_field.getText(),grade));
+            students.add(new Student(id_field.getText(), name_field.getText(), age, school_field.getText(), grade));
             try (FileWriter writer = new FileWriter(filePath1)) {
                 gsonStudent.toJson(students, writer);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        if(!id_fieldm.getText().isEmpty()&&!name_fieldm.getText().isEmpty()&&!age_fieldm.getText().isEmpty()) {
+        if (!id_fieldm.getText().isEmpty() && !name_fieldm.getText().isEmpty() && !age_fieldm.getText().isEmpty()) {
             int agem = Integer.parseInt(age_fieldm.getText());
             members.add(new External_Member(id_fieldm.getText(), name_fieldm.getText(), agem, job_field.getText(), organization_field.getText()));
             try (FileWriter writer = new FileWriter(filePath2)) {
@@ -107,8 +102,7 @@ public class HelloController {
     }
 
     @FXML
-    protected void showMember(ActionEvent event) {
-        showbtn = (Button) event.getSource();
+    protected void showMember() {
         show_field.clear();
         for (External_Member member : members) {
             show_field.appendText(member.toString());
@@ -121,8 +115,7 @@ public class HelloController {
     }
 
     @FXML
-    protected void addMovie(ActionEvent event) {
-        addbtnM = (Button) event.getSource();
+    protected void addMovie() {
         for(int i=0; i< movies.size(); i++){
             try{
                 if(movieId.getText().equalsIgnoreCase(movies.get(i).getId())){
@@ -143,8 +136,7 @@ public class HelloController {
     }
 
     @FXML
-    protected void showMovie(ActionEvent event) {
-        showbtnM = (Button) event.getSource();
+    protected void showMovie() {
         showMovieArea.clear();
         for (Movie movie : movies) {
             showMovieArea.appendText(movie.toString());
@@ -153,43 +145,48 @@ public class HelloController {
     }
 
     @FXML
-    protected void addMovieRent(ActionEvent event){
-        addbtnMRent = (Button) event.getSource();
+    protected void addMovieRent(){
         boolean flag = false;
         for(int i=0;i<movies.size();i++){
-            if(!(movies.get(i).getId().equalsIgnoreCase(movId.getText())) ||movies.get(i).isAvailability()==false){
+            if(!(movies.get(i).getId().equalsIgnoreCase(movId.getText())) || movies.get(i).isAvailability()==false){
                 flag=true;
             }
-            else if(movies.get(i).getId().equalsIgnoreCase(movId.getText())&&movies.get(i).isAvailability()==true) {
-                System.out.println("Movie rented");
+            else if(movies.get(i).getId().equalsIgnoreCase(movId.getText()) && movies.get(i).isAvailability()==true) {
+                RentedText.setText("Movie Rented");
+                alert.setTitle("Movie rented successfully");
                 String date = String.valueOf(date_field);
                 movies.get(i).setDate(date);
                 movies.get(i).setAvailability(false);
-                flag=false;
-                for(int s=0;s<students.size();s++) {
-                    if (idM.getText().equalsIgnoreCase(students.get(s).getId())) {
+                for (Student student : students) {
+                    if (idM.getText().equalsIgnoreCase(student.getId())) {
                         movies.get(i).setStudentId(idM.getText());
                     }
                 }
-                for(int m=0;m<members.size();m++){
-                   if (idM.getText().equalsIgnoreCase(members.get(m).getId())){
+                for (External_Member member : members) {
+                    if (idM.getText().equalsIgnoreCase(member.getId())) {
                         movies.get(i).setMemberId(idM.getText());
-                   }
+                    }
                 }
-
-            }
-            try {
-                if(flag){
-                    throw new CheckMovieException("Movie doesn't exist or not available");
+                flag=false;
+                try {
+                    if(flag){
+                        throw new CheckMovieException("Movie doesn't exist or not available");
+                    }
+                }catch (CheckMovieException e){
+                    System.out.println(e.getMessage());
                 }
-            }catch (CheckMovieException e){
-                System.out.println(e.getMessage());
             }
+        }
+        try (FileWriter writer = new FileWriter(filePath3)) {
+            gsonMovie.toJson(movies, writer);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
     @FXML
     protected void calculate(){
+        Payement_field.clear();
         int days;
         try{
             for(Movie movie : movies){
@@ -197,9 +194,9 @@ public class HelloController {
                     if(movie.getId().equalsIgnoreCase(returnMvId.getText())){
                         movie.setAvailability(true);
                         days = DateReturn.getValue().compareTo(date_field.getValue());
-                        String paye= String.valueOf(movie.calculate(days));
-                        Payement_field.appendText(paye);
-
+                        String pay= String.valueOf(movie.calculate(days));
+                        Payement_field.appendText(pay);
+                        RentedText.setText("Movie Returned");
                     }
                 }
                 else{
@@ -208,6 +205,11 @@ public class HelloController {
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
+        }
+        try (FileWriter writer = new FileWriter(filePath3)) {
+            gsonMovie.toJson(movies, writer);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

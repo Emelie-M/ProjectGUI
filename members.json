@@ -26,5 +26,12 @@
     "name": "Clodia",
     "age": 18,
     "id": "E2"
+  },
+  {
+    "job": "Cybersecurity",
+    "organization": "Google",
+    "name": "Dief",
+    "age": 22,
+    "id": "E3"
   }
 ]

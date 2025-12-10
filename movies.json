@@ -3,19 +3,25 @@
     "title": "Zootopia",
     "genre": "comedy",
     "id": "M1",
-    "availability": true
+    "availability": true,
+    "studentId": "S1",
+    "date": "DatePicker[id\u003ddate_field, styleClass\u003dcombo-box-base date-picker]"
   },
   {
     "title": "Happy Gilmore",
     "genre": "comedy",
     "id": "M2",
-    "availability": true
+    "availability": true,
+    "studentId": "S1",
+    "date": "DatePicker[id\u003ddate_field, styleClass\u003dcombo-box-base date-picker]"
   },
   {
     "title": "Al fondo hay sitio",
     "genre": "Drama",
     "id": "M3",
-    "availability": true
+    "availability": true,
+    "studentId": "S1",
+    "date": "DatePicker[id\u003ddate_field, styleClass\u003dcombo-box-base date-picker]"
   },
   {
     "title": "Five Nights at Freddy\u0027s",

@@ -3,6 +3,8 @@ package com.example.projectgui;
 import javafx.event.ActionEvent;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HelloControllerTest {
@@ -23,7 +25,7 @@ class HelloControllerTest {
         controller.age_field.setText("22");
         controller.school_field.setText("Vanier");
         controller.grade_field.setText("3");
-        controller.addMember(new ActionEvent());
+        controller.addMember();
         assertEquals(1, controller.students.size(), "Student should be added");
 
     }

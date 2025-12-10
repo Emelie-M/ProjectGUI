@@ -213,6 +213,11 @@
                      </font>
                   </Button>
                   <TextArea fx:id="sMv" layoutX="27.0" layoutY="220.0" prefHeight="236.0" prefWidth="686.0" />
+                  <Label fx:id="RentedText" layoutX="463.0" layoutY="171.0" prefHeight="34.0" prefWidth="183.0" textFill="#b2ff74">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </content>
