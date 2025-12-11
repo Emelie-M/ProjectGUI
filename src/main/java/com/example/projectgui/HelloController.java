@@ -81,6 +81,11 @@ public class HelloController {
             studentArea.appendText(student.toString());
             studentArea.appendText("\n");
         }
+        showMovieArea.clear();
+        for (Movie movie : movies) {
+            showMovieArea.appendText(movie.toString());
+            showMovieArea.appendText("\n");
+        }
         choiceMember.setItems(FXCollections.observableArrayList("Student", "External Member"));
         choiceMember.setPromptText("Choice");
     }
@@ -221,31 +226,58 @@ public class HelloController {
 
     @FXML
     protected void addMovie() {
-        for(int i=0; i< movies.size(); i++){
-            try{
-                if(movieId.getText().equalsIgnoreCase(movies.get(i).getId())){
-                    throw new CheckIdException("Id already exists");
+        for(int i=0; i< movies.size(); i++) {
+            boolean flag = true;
+            if (movieId.getText().equalsIgnoreCase(movies.get(i).getId())) {
+                flag = false;
+                Alert warningAlert = new Alert(Alert.AlertType.WARNING);
+                warningAlert.setTitle("Warning");
+                warningAlert.setHeaderText("Duplicate Id");
+                warningAlert.setContentText("Can't add movie because id already exists");
+                warningAlert.showAndWait();
+            } else {
+                if (!movieId.getText().isEmpty() && !title_field.getText().isEmpty() && !genre_field.getText().isEmpty()) {
+                    try{
+                        if(!movieId.getText().matches("[A-Z]\\d+")) {
+                            throw new Exception();
+                        }
+                    }catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        flag = false;
+                        Alert IdAlert = new Alert(Alert.AlertType.INFORMATION);
+                        IdAlert.setTitle("Info");
+                        IdAlert.setHeaderText("ID wrongly put");
+                        IdAlert.setContentText("The Id should start with a capital letter followed with numbers");
+                        IdAlert.showAndWait();
+                    }
+                    try {
+                        if(!title_field.getText().matches("[A-Z][a-z]")||!genre_field.getText().matches("[A-Z][a-z]")) {
+                            throw new Exception();
+                        }
+                    }catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        flag = false;
+                        Alert TitleAlert = new Alert(Alert.AlertType.INFORMATION);
+                        TitleAlert.setTitle("Info");
+                        TitleAlert.setHeaderText("Info wrongly put");
+                        TitleAlert.setContentText("The information should should only contain letters");
+                        TitleAlert.showAndWait();
+                    }
+                    if(flag) {
+                        movies.add(new Movie(movieId.getText(), title_field.getText(), genre_field.getText(), true));
+                        try (FileWriter writer = new FileWriter(filePath3)) {
+                            gsonMovie.toJson(movies, writer);
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    }
                 }
-            }catch (CheckIdException c){
-                System.out.println(c.getMessage());
+                showMovieArea.clear();
+                for (Movie movie : movies) {
+                    showMovieArea.appendText(movie.toString());
+                    showMovieArea.appendText("\n");
+                }
             }
-        }
-        if(!movieId.getText().isEmpty()&&!title_field.getText().isEmpty()&&!genre_field.getText().isEmpty()){
-            movies.add(new Movie(movieId.getText(),title_field.getText(),genre_field.getText(),true));
-            try (FileWriter writer = new FileWriter(filePath3)) {
-                gsonMovie.toJson(movies, writer);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-    }
-
-    @FXML
-    protected void showMovie() {
-        showMovieArea.clear();
-        for (Movie movie : movies) {
-            showMovieArea.appendText(movie.toString());
-            showMovieArea.appendText("\n");
         }
     }
 
