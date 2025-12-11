@@ -251,7 +251,7 @@ public class HelloController {
                         IdAlert.showAndWait();
                     }
                     try {
-                        if(!title_field.getText().matches("[A-Z][a-z]")||!genre_field.getText().matches("[A-Z][a-z]")) {
+                        if(!title_field.getText().matches("[A-Z][a-z][0-9]")) {
                             throw new Exception();
                         }
                     }catch (Exception e) {
@@ -259,9 +259,22 @@ public class HelloController {
                         flag = false;
                         Alert TitleAlert = new Alert(Alert.AlertType.INFORMATION);
                         TitleAlert.setTitle("Info");
-                        TitleAlert.setHeaderText("Info wrongly put");
-                        TitleAlert.setContentText("The information should should only contain letters");
+                        TitleAlert.setHeaderText("title wrongly put");
+                        TitleAlert.setContentText("The title should should only contain letters and numbers");
                         TitleAlert.showAndWait();
+                    }
+                    try{
+                        if(!genre_field.getText().matches("[A-Z][a-z]")){
+                            throw new Exception();
+                        }
+                    }catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        flag = false;
+                        Alert GenreAlert = new Alert(Alert.AlertType.INFORMATION);
+                        GenreAlert.setTitle("Info");
+                        GenreAlert.setHeaderText("Genre wrongly put");
+                        GenreAlert.setContentText("The genre should only contain letters");
+                        GenreAlert.showAndWait();
                     }
                     if(flag) {
                         movies.add(new Movie(movieId.getText(), title_field.getText(), genre_field.getText(), true));
