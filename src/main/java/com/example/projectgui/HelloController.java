@@ -3,7 +3,7 @@ package com.example.projectgui;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -15,21 +15,25 @@ import java.util.ArrayList;
 
 public class HelloController {
     @FXML
-    protected TextField id_field, id_fieldm, name_field, name_fieldm, age_field, age_fieldm, school_field, grade_field, job_field, organization_field, movieId, title_field,genre_field, movId, idM, ReturnMId, returnMvId, Payement_field;
+    protected TextField id_field,  name_field, firstField, secondField, age_field, movieId, title_field,genre_field, movId, idM, ReturnMId, returnMvId, Payement_field;
 
     @FXML
-    private Label RentedText;
+    protected ComboBox<String> choiceMember;
+
+    @FXML
+    private Label RentedText, firstLabel, secondLabel;
 
     @FXML
     private DatePicker date_field, DateReturn;
 
     @FXML
-    private TextArea show_field,showMovieArea,sMv;
+    private TextArea studentArea, memberArea,showMovieArea,sMv;
 
     @FXML
     ArrayList<Student> students = new ArrayList<>();
     ArrayList<External_Member> members = new ArrayList<>();
     ArrayList<Movie> movies = new ArrayList<>();
+
     Gson gsonStudent = new GsonBuilder().setPrettyPrinting().create();
     String filePath1 = "students.json";
     Gson gsonMember = new GsonBuilder().setPrettyPrinting().create();
@@ -67,14 +71,49 @@ public class HelloController {
                 System.out.println("Error reading existing JSON: " + e.getMessage());
             }
         }
+        studentArea.clear();
+        memberArea.clear();
+        for (External_Member member : members) {
+            memberArea.appendText(member.toString());
+            memberArea.appendText("\n");
+        }
+        for (Student student : students) {
+            studentArea.appendText(student.toString());
+            studentArea.appendText("\n");
+        }
+        choiceMember.setItems(FXCollections.observableArrayList("Student", "External Member"));
+        choiceMember.setPromptText("Choice");
+    }
+
+    @FXML
+    protected void choice(){
+        String value = choiceMember.getValue();
+        if (value != null && !value.trim().isEmpty()) {
+            if(value.equals("Student")){
+                firstLabel.setText("School :");
+                firstField.setPromptText("School Name");
+                secondLabel.setText("Grade :");
+                secondField.setPromptText("Grade");
+            }
+            if(value.equals("External Member")){
+                firstLabel.setText("Job :");
+                firstField.setPromptText("Job Name");
+                secondLabel.setText("Organization :");
+                secondField.setPromptText("Organization Name");
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Select Option");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     protected void addMember() {
-        boolean flag = true;
         for(int i=0; i<students.size()&&i< members.size(); i++) {
-            while (flag) {
-                if (id_field.getText().equalsIgnoreCase(students.get(i).getId()) || id_fieldm.getText().equalsIgnoreCase(members.get(i).getId())) {
+            boolean flag = true;
+                if (id_field.getText().equalsIgnoreCase(students.get(i).getId()) || id_field.getText().equalsIgnoreCase(members.get(i).getId())) {
                     flag = false;
                     Alert warningAlert = new Alert(Alert.AlertType.WARNING);
                     warningAlert.setTitle("Warning");
@@ -84,41 +123,99 @@ public class HelloController {
                 }
                 else {
                     if (!id_field.getText().isEmpty() && !name_field.getText().isEmpty() && !age_field.getText().isEmpty()) {
-                        int age = Integer.parseInt(age_field.getText());
-                        int grade = Integer.parseInt(grade_field.getText());
-                        students.add(new Student(id_field.getText(), name_field.getText(), age, school_field.getText(), grade));
-                        try (FileWriter writer = new FileWriter(filePath1)) {
-                            gsonStudent.toJson(students, writer);
+                        try {
+                            if (!id_field.getText().matches("[A-Z]\\d+")) {
+                                throw new Exception();
+                            }
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
+                            flag = false;
+                            Alert IdAlert = new Alert(Alert.AlertType.INFORMATION);
+                            IdAlert.setTitle("Info");
+                            IdAlert.setHeaderText("ID wrongly put");
+                            IdAlert.setContentText("The Id should start with a capital letter followed with numbers");
+                            IdAlert.showAndWait();
                         }
-                        flag = false;
-                    }
-                    if (!id_fieldm.getText().isEmpty() && !name_fieldm.getText().isEmpty() && !age_fieldm.getText().isEmpty()) {
-                        int agem = Integer.parseInt(age_fieldm.getText());
-                        members.add(new External_Member(id_fieldm.getText(), name_fieldm.getText(), agem, job_field.getText(), organization_field.getText()));
+                        try {
+                            if (!name_field.getText().matches("[A-Z][a-z]")) {
+                                throw new Exception();
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                            flag = false;
+                            Alert NameAlert = new Alert(Alert.AlertType.INFORMATION);
+                            NameAlert.setTitle("Info");
+                            NameAlert.setHeaderText("Name wrongly put");
+                            NameAlert.setContentText("The name should only contain letters");
+                            NameAlert.showAndWait();
+                        }
+                        int age = Integer.parseInt(age_field.getText());
+                        int grade = Integer.parseInt(secondField.getText());
+                        try {
+                            if (age > 100 && age < 16 && !age_field.getText().matches("[0-9]")) {
+                                throw new Exception();
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                            flag = false;
+                            Alert AgeAlert = new Alert(Alert.AlertType.INFORMATION);
+                            AgeAlert.setTitle("Info");
+                            AgeAlert.setHeaderText("Age wrongly put");
+                            AgeAlert.setContentText("The age should only contain numbers between 16 & 100");
+                            AgeAlert.showAndWait();
+                        }
+                        try {
+                            if (grade < 0 && grade > 100) {
+                                throw new Exception();
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                            flag = false;
+                            Alert GradeAlert = new Alert(Alert.AlertType.INFORMATION);
+                            GradeAlert.setTitle("Info");
+                            GradeAlert.setHeaderText("Grade wrongly put");
+                            GradeAlert.setContentText("The grade should only contain numbers");
+                            GradeAlert.showAndWait();
+                        }
+                        try{
+                            if(!firstField.getText().matches("[A-Z][a-z]")||!secondField.getText().matches("[A-Z][a-z]")){
+                                throw new Exception();
+                            }
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
+                            Alert InfoAlert = new Alert(Alert.AlertType.INFORMATION);
+                            InfoAlert.setTitle("Info");
+                            InfoAlert.setHeaderText("Input wrongly put");
+                            InfoAlert.setContentText("The input should contain letters");
+                            InfoAlert.showAndWait();
+                        }
+                        if (flag) {
+                            students.add(new Student(id_field.getText(), name_field.getText(), age, firstField.getText(), grade));
+                            members.add(new External_Member(id_field.getText(), name_field.getText(), age, firstField.getText(), secondField.getText()));
+                            try (FileWriter writer = new FileWriter(filePath1)) {
+                                gsonStudent.toJson(students, writer);
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
                         try (FileWriter writer = new FileWriter(filePath2)) {
                             gsonMember.toJson(members, writer);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
-                        flag = false;
                     }
                 }
-            }
-        }
-    }
 
-    @FXML
-    protected void showMember() {
-        show_field.clear();
+        }
+        studentArea.clear();
+        memberArea.clear();
         for (External_Member member : members) {
-            show_field.appendText(member.toString());
-            show_field.appendText("\n");
+            memberArea.appendText(member.toString());
+            memberArea.appendText("\n");
         }
         for (Student student : students) {
-            show_field.appendText(student.toString());
-            show_field.appendText("\n");
+            studentArea.appendText(student.toString());
+            studentArea.appendText("\n");
         }
     }
 

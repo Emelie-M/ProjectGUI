@@ -22,7 +22,7 @@ abstract public class Person {
     }
 
     public String toString() {
-        return "id=" + id+",   name= " + name +
-                ",    age=" + age;
+        return "Id: " + id+",    Name: " + name +
+                ",    age: " + age;
     }
 }
