@@ -8,6 +8,7 @@ public class Movie implements Payement{
     public String studentId;
     public String memberId;
     public String date;
+    public String memberRent;
 
     public Movie(String id,String title,String genre,boolean availability){
         this.id = id;
@@ -68,10 +69,22 @@ public class Movie implements Payement{
     }
 
     public String toString() {
-        return "id= "+id+
-                ",   title= " + title +
-                ",   genre= " + genre +
-                ",   availability= " + availability;
+        return "id: "+id+
+                ",   title: " + title +
+                ",   genre: " + genre +
+                ",   availability: " + availability;
+    }
+
+    public String toString2() {
+        if(studentId != null){
+            memberRent=studentId;
+        }
+        if(memberId != null){
+            memberRent=memberId;
+        }
+        return "id: "+id+
+                ",   title: " + title +
+                ",   Rented by: " + memberRent;
     }
 
     @Override

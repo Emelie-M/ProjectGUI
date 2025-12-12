@@ -14,6 +14,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class HelloController {
+
     @FXML
     protected TextField id_field,  name_field, firstField, secondField, age_field, movieId, title_field,genre_field, movId, idM, ReturnMId, returnMvId, Payement_field;
 
@@ -21,13 +22,13 @@ public class HelloController {
     protected ComboBox<String> choiceMember;
 
     @FXML
-    private Label RentedText, firstLabel, secondLabel;
+    protected Label RentedText, firstLabel, secondLabel;
 
     @FXML
-    private DatePicker date_field, DateReturn;
+    protected DatePicker date_field, DateReturn;
 
     @FXML
-    private TextArea studentArea, memberArea,showMovieArea,sMv;
+    protected TextArea studentArea, memberArea, showMovieArea, sMv;
 
     @FXML
     ArrayList<Student> students = new ArrayList<>();
@@ -41,7 +42,6 @@ public class HelloController {
     Gson gsonMovie = new GsonBuilder().setPrettyPrinting().create();
     String filePath3 = "movies.json";
     File file = new File(filePath1);
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     @FXML
     protected void initialize() {
@@ -88,6 +88,11 @@ public class HelloController {
         }
         choiceMember.setItems(FXCollections.observableArrayList("Student", "External Member"));
         choiceMember.setPromptText("Choice");
+        sMv.clear();
+        for (Movie movie : movies) {
+            sMv.appendText(movie.toString2());
+            sMv.appendText("\n");
+        }
     }
 
     @FXML
@@ -142,7 +147,7 @@ public class HelloController {
                             IdAlert.showAndWait();
                         }
                         try {
-                            if (!name_field.getText().matches("[A-Z][a-z]")) {
+                            if (!name_field.getText().matches("[A-Za-z]")) {
                                 throw new Exception();
                             }
                         } catch (Exception e) {
@@ -183,7 +188,7 @@ public class HelloController {
                             GradeAlert.showAndWait();
                         }
                         try{
-                            if(!firstField.getText().matches("[A-Z][a-z]")||!secondField.getText().matches("[A-Z][a-z]")){
+                            if(!firstField.getText().matches("[A-Za-z]")||!secondField.getText().matches("[A-Za-z]")){
                                 throw new Exception();
                             }
                         }catch (Exception e){
@@ -225,9 +230,23 @@ public class HelloController {
     }
 
     @FXML
+    protected void listMember(){
+        studentArea.clear();
+        memberArea.clear();
+        for (External_Member member : members) {
+            memberArea.appendText(member.toString());
+            memberArea.appendText("\n");
+        }
+        for (Student student : students) {
+            studentArea.appendText(student.toString());
+            studentArea.appendText("\n");
+        }
+    }
+
+    @FXML
     protected void addMovie() {
+        boolean flag = true;
         for(int i=0; i< movies.size(); i++) {
-            boolean flag = true;
             if (movieId.getText().equalsIgnoreCase(movies.get(i).getId())) {
                 flag = false;
                 Alert warningAlert = new Alert(Alert.AlertType.WARNING);
@@ -250,21 +269,8 @@ public class HelloController {
                         IdAlert.setContentText("The Id should start with a capital letter followed with numbers");
                         IdAlert.showAndWait();
                     }
-                    try {
-                        if(!title_field.getText().matches("[A-Z][a-z][0-9]")) {
-                            throw new Exception();
-                        }
-                    }catch (Exception e) {
-                        System.out.println(e.getMessage());
-                        flag = false;
-                        Alert TitleAlert = new Alert(Alert.AlertType.INFORMATION);
-                        TitleAlert.setTitle("Info");
-                        TitleAlert.setHeaderText("title wrongly put");
-                        TitleAlert.setContentText("The title should should only contain letters and numbers");
-                        TitleAlert.showAndWait();
-                    }
                     try{
-                        if(!genre_field.getText().matches("[A-Z][a-z]")){
+                        if(!genre_field.getText().matches("[A-Za-z]+")){
                             throw new Exception();
                         }
                     }catch (Exception e) {
@@ -290,23 +296,51 @@ public class HelloController {
                     showMovieArea.appendText(movie.toString());
                     showMovieArea.appendText("\n");
                 }
+                flag = false;
             }
         }
     }
 
     @FXML
+    protected void listMovies() {
+        showMovieArea.clear();
+        for (Movie movie : movies) {
+            showMovieArea.appendText(movie.toString());
+            showMovieArea.appendText("\n");
+        }
+    }
+
+    @FXML
     protected void addMovieRent(){
-        boolean flag = false;
+        boolean flag = true;
         for(int i=0;i<movies.size();i++){
             if(!(movies.get(i).getId().equalsIgnoreCase(movId.getText())) || movies.get(i).isAvailability()==false){
-                flag=true;
+                flag=false;
+                Alert warningAlert = new Alert(Alert.AlertType.WARNING);
+                warningAlert.setTitle("Warning");
+                warningAlert.setHeaderText("Id not found or Movie not available");
+                warningAlert.setContentText("Can't rent movie that doesn't exist or that is not available");
+                warningAlert.showAndWait();
             }
-            else if(movies.get(i).getId().equalsIgnoreCase(movId.getText()) && movies.get(i).isAvailability()==true) {
-                RentedText.setText("Movie Rented");
-                alert.setTitle("Movie rented successfully");
+            try{
+                if(!movId.getText().matches("[A-Z]\\d+")||!idM.getText().matches("[A-Z]\\d+")) {
+                    throw new Exception();
+                }
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+                flag = false;
+                Alert IdAlert = new Alert(Alert.AlertType.INFORMATION);
+                IdAlert.setTitle("Info");
+                IdAlert.setHeaderText("ID wrongly put");
+                IdAlert.setContentText("The Id should start with a capital letter followed with numbers");
+                IdAlert.showAndWait();
+            }
+            if(movies.get(i).getId().equalsIgnoreCase(movId.getText()) && movies.get(i).isAvailability()==true && flag==true) {
                 String date = String.valueOf(date_field);
                 movies.get(i).setDate(date);
                 movies.get(i).setAvailability(false);
+                String test = String.valueOf(date_field);
+                System.out.println(test);
                 for (Student student : students) {
                     if (idM.getText().equalsIgnoreCase(student.getId())) {
                         movies.get(i).setStudentId(idM.getText());
@@ -317,20 +351,18 @@ public class HelloController {
                         movies.get(i).setMemberId(idM.getText());
                     }
                 }
-                flag=false;
-                try {
-                    if(flag){
-                        throw new CheckMovieException("Movie doesn't exist or not available");
-                    }
-                }catch (CheckMovieException e){
-                    System.out.println(e.getMessage());
+                try (FileWriter writer = new FileWriter(filePath3)) {
+                    gsonMovie.toJson(movies, writer);
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
+                flag = false;
             }
         }
-        try (FileWriter writer = new FileWriter(filePath3)) {
-            gsonMovie.toJson(movies, writer);
-        } catch (Exception e) {
-            System.out.println(e);
+        sMv.clear();
+        for (Movie movie : movies) {
+            sMv.appendText(movie.toString2());
+            sMv.appendText("\n");
         }
     }
 
@@ -346,7 +378,8 @@ public class HelloController {
                         days = DateReturn.getValue().compareTo(date_field.getValue());
                         String pay= String.valueOf(movie.calculate(days));
                         Payement_field.appendText(pay);
-                        RentedText.setText("Movie Returned");
+                        movie.setStudentId(null);
+                        movie.setMemberId(null);
                     }
                 }
                 else{
@@ -361,13 +394,18 @@ public class HelloController {
         } catch (Exception e) {
             System.out.println(e);
         }
+        sMv.clear();
+        for (Movie movie : movies) {
+            sMv.appendText(movie.toString2());
+            sMv.appendText("\n");
+        }
     }
 
     @FXML
-    protected void showMovieR(){
+    protected void listRent(){
         sMv.clear();
         for (Movie movie : movies) {
-            sMv.appendText(movie.toString());
+            sMv.appendText(movie.toString2());
             sMv.appendText("\n");
         }
     }

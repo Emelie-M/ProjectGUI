@@ -3,9 +3,10 @@
     "title": "Zootopia",
     "genre": "comedy",
     "id": "M1",
-    "availability": true,
+    "availability": false,
     "studentId": "S1",
-    "date": "DatePicker[id\u003ddate_field, styleClass\u003dcombo-box-base date-picker]"
+    "date": "DatePicker@3ed7b6f[styleClass\u003dcombo-box-base date-picker]",
+    "memberRent": "S1"
   },
   {
     "title": "Happy Gilmore",
@@ -13,7 +14,8 @@
     "id": "M2",
     "availability": true,
     "studentId": "S1",
-    "date": "DatePicker[id\u003ddate_field, styleClass\u003dcombo-box-base date-picker]"
+    "date": "DatePicker[id\u003ddate_field, styleClass\u003dcombo-box-base date-picker]",
+    "memberRent": "S1"
   },
   {
     "title": "Al fondo hay sitio",
@@ -21,12 +23,22 @@
     "id": "M3",
     "availability": true,
     "studentId": "S1",
-    "date": "DatePicker[id\u003ddate_field, styleClass\u003dcombo-box-base date-picker]"
+    "date": "DatePicker[id\u003ddate_field, styleClass\u003dcombo-box-base date-picker]",
+    "memberRent": "S1"
   },
   {
     "title": "Five Nights at Freddy\u0027s",
     "genre": "Horror",
     "id": "M4",
+    "availability": false,
+    "studentId": "S1",
+    "date": "DatePicker[id\u003ddate_field, styleClass\u003dcombo-box-base date-picker]",
+    "memberRent": "S1"
+  },
+  {
+    "title": "The Grinch",
+    "genre": "Cartoon",
+    "id": "M5",
     "availability": true
   }
 ]
